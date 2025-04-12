@@ -1,0 +1,57 @@
+{% extends 'index.html' %}
+
+{% load static %}
+{% block title %}
+<title>Online Bazar | About Us Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="text-center" style="color: #1565C0; font-weight: bold;">About Online Bazaar</h1>
+    <p class="text-center text-muted">Your trusted online shopping destination</p>
+
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-10">
+            <div class="card shadow-lg p-4 border-0"
+                style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border-radius: 15px;">
+                <h4 class="text-dark text-center mb-3">Who We Are</h4>
+                <p class="about-content">
+                    Welcome to <strong>Online Bazaar</strong>! We're your go-to destination for an incredible
+                    shopping experience. Our online marketplace offers a wide array of top-notch products,
+                    encompassing everything from fashion to home essentials and more. We're
+                    committed to delivering convenience, quality, and satisfaction to our customers.
+                </p>
+                <p class="about-content">
+                    Our mission is to create a seamless shopping platform where you can explore a diverse range of
+                    products, discover new trends, and shop with confidence. With user-friendly navigation, secure
+                    transactions, and attentive customer service, we strive to make your shopping journey enjoyable
+                    and hassle-free.
+                </p>
+                <p class="about-content">
+                    Join our growing community of smart shoppers and embark on a delightful shopping adventure
+                    today! Thank you for choosing <strong>Online Bazaar</strong>.
+                </p>
+                <p class="about-content text-center fw-bold">Happy shopping!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #F5F7FA, #E3F2FD, #D6EAF8);
+        color: #333;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .about-content {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .card {
+        backdrop-filter: blur(10px);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'index.html' %}
+
+{% load static %}
+{% load product %}
+{% block title %}
+<title>Online Bazar | Buyer Profile Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid mt-3">
+  <div class="row justify-content-center">
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 text-center mb-4">
+      {% if User.pic %}
+      <img src="{{User.pic.url}}" class="img-fluid rounded shadow" style="max-width: 300px;">
+      {% else %}
+      <img src="{% static 'images/noimage.png'%}" class="img-fluid rounded shadow" style="max-width: 300px;">
+      {% endif %}
+    </div>
+
+    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+      <div class="card shadow-lg p-4 mb-4" style="background: linear-gradient(to right, #E3F2FD, #BBDEFB); border-radius: 20px;">
+        <h3 class="text-center text-dark fw-bold mb-4" style="font-family: cursive;">Buyer Profile Page</h3>
+        <table class="table table-hover text-black">
+          <tr><th>Name</th><td>{{User.name}}</td></tr>
+          <tr><th>User Name</th><td>{{User.username}}</td></tr>
+          <tr><th>Email Id</th><td>{{User.email}}</td></tr>
+          <tr><th>Phone Number</th><td>{{User.phone}}</td></tr>
+          <tr><th>House Number</th><td>{{User.addressline1}}</td></tr>
+          <tr><th>PIN</th><td>{{User.pin}}</td></tr>
+          <tr><th>City</th><td>{{User.city}}</td></tr>
+          <tr><th>State</th><td>{{User.state}}</td></tr>
+          <tr>
+            <th colspan="2">
+              <a href="/updateProfile/" class="btn btn-outline-dark btn-success w-100 fw-bold">Update Profile</a>
+            </th>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4 class="text-center p-2 fw-bold text-dark" style="background: #BBDEFB;">Wishlist Section</h4>
+<div class="table-responsive">
+  <table class="table table-hover table-striped table-light">
+    <tr>
+      <th></th><th>Name</th><th>Color</th><th>Size</th><th>Base Price</th>
+      <th>Discount</th><th>Final Price</th><th>Stock</th><th></th><th></th>
+    </tr>
+    {% for i in Wishlist %}
+    <tr>
+      <td><img src="{% if i.product.pic1 %}{{i.product.pic1.url}}{% else %}{% static 'picture/noimg.png' %}{% endif %}" height="100px" width="100px"></td>
+      <td>{{i.product.name}}</td>
+      <td>{{i.product.color}}</td>
+      <td>{{i.product.size}}</td>
+      <td>&#8377;{{i.product.baseprice}}</td>
+      <td>{{i.product.discount}}%</td>
+      <td>&#8377;{{i.product.finalprice}}</td>
+      <td>{{i.product.stock}}</td>
+      <td><a href="/single-product-page/{{i.product.id}}/" class="btn text-primary"><i class="material-icons">shopping_cart</i></a></td>
+      <td><button class="btn text-primary" onclick="fun('{{i.id}}')"><i class="material-icons">delete_forever</i></button></td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
+
+<h4 class="text-center p-2 fw-bold text-dark" style="background: #BBDEFB;">Order History Section</h4>
+{% for i in Orders %}
+<div class="row p-3 mb-4" style="border-bottom: 5px solid #ccc;">
+  <div class="col-md-4">
+    <div class="card shadow-sm p-3" style="background-color: #E3F2FD;">
+      <table class="table table-light table-striped table-hover">
+        <tr><th>Order Id</th><td>{{i.id}}</td></tr>
+        <tr><th>Mode</th><td>{{i.mode}}</td></tr>
+        <tr><th>Order Status</th><td>{{request|orderStatus:i.orderstatus}}</td></tr>
+        <tr>
+          <th>Payment Status</th>
+          <td>
+            {{request|paymentStatus:i.paymentstatus}}
+            {% if request|paymentStatusCon:i.paymentstatus %}
+              <a href="/paynow/{{i.id}}" class="btn bg-primary text-light btn-sm">Pay Now</a>
+            {% endif %}
+          </td>
+        </tr>
+        <tr><th>Total</th><td>&#8377;{{i.total}}</td></tr>
+        <tr><th>Shipping</th><td>&#8377;{{i.shipping}}</td></tr>
+        <tr><th>Final</th><td>&#8377;{{i.final}}</td></tr>
+        <tr><th>Date</th><td>{{i.date}}</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-8">
+    <div class="card shadow-sm p-3">
+      <table class="table table-light table-striped table-hover">
+        <tr><th></th><th>Name</th><th>Size</th><th>Color</th><th>Price</th><th>Qty</th><th>Total</th></tr>
+        {% for i in request|orderItem:i.id %}
+        <tr>
+          <td><img src="{{i.pic}}" height="100px" width="100px" class="rounded"></td>
+          <td>{{i.name}}</td>
+          <td>{{i.size}}</td>
+          <td>{{i.color}}</td>
+          <td>&#8377;{{i.price}}</td>
+          <td>{{i.qty}}</td>
+          <td>&#8377;{{i.total}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+<script>
+  function fun(num) {
+    if (confirm("Are You Sure!!! Do You want delete this Item"))
+      window.open(`/delete-wishlist/${num}/`)
+  }
+</script>
+
+<style>
+  body {
+    background: linear-gradient(to right, #F5F7FA, #E3F2FD);
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
+{% endblock %}

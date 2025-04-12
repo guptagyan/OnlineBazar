@@ -1,0 +1,106 @@
+{% extends 'index.html' %}
+
+{% load static %}
+{% load cart %}
+
+{% block title %}
+<title>Online Bazar | Cart Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+  <h2 class="text-center text-primary font-weight-bold mb-4">🛒 Your Shopping Cart</h2>
+
+  <div class="card shadow-lg p-3 border-0 mb-4" style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border-radius: 15px;">
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered">
+        <thead class="thead-light">
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th></th>
+            <th>QTY</th>
+            <th></th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in Cart %}
+          <tr>
+            <td>
+              {% if request|cartProductImage:i %}
+              <img src="{{request|cartProductImage:i}}" height="100px" width="100px">
+              {% else %}
+              <img src="{% static 'picture/noimg.png' %}" height="100px" width="100px">
+              {% endif %}
+            </td>
+            <td>{{request|cartProductName:i}}</td>
+            <td>{{request|cartColor:i}}</td>
+            <td>{{request|cartSize:i}}</td>
+            <td>&#8377;{{request|cartProductPrice:i}}</td>
+            <td><a href="/update-cart/{{i}}/-1/" class="btn text-primary"><i class="material-icons">remove</i></a></td>
+            <td>{{request|cartQty:i}}</td>
+            <td><a href="/update-cart/{{i}}/1/" class="btn text-primary"><i class="material-icons">add</i></a></td>
+            <td>&#8377;{{request|cartTotal:i}}</td>
+            <td><button class="btn text-danger" onclick="fun('{{i}}')"><i class="material-icons">delete_forever</i></button></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="row justify-content-end">
+    <div class="col-md-6 col-sm-12">
+      <div class="card shadow-lg p-3 border-0" style="background: linear-gradient(135deg, #D1C4E9, #EDE7F6); border-radius: 15px;">
+        <table class="table table-light table-striped table-hover mb-0">
+          <tr>
+            <th>Total</th>
+            <td>&#8377;{{Total}}</td>
+          </tr>
+          <tr>
+            <th>Shipping</th>
+            <td>&#8377;{{Shipping}}</td>
+          </tr>
+          <tr>
+            <th>Final</th>
+            <td><strong>&#8377;{{Final}}</strong></td>
+          </tr>
+          <tr>
+            <td colspan="2"><a class="btn btn-success text-white w-100 mt-2" href="/checkout/">Proceed to Checkout</a></td>
+          </tr>
+          <tr>
+            <td colspan="2"><a class="btn btn-outline-primary w-100" href="/shop/All/All/All/">Continue Shopping</a></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(135deg, #F5F7FA, #E3F2FD, #D6EAF8);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .table td, .table th {
+    vertical-align: middle !important;
+  }
+
+  .material-icons {
+    vertical-align: middle;
+  }
+</style>
+
+<script>
+  function fun(num) {
+    if (confirm("Are You Sure? Do you want to delete this item?"))
+      window.location.href = `/delete-cart/${num}/`;
+  }
+</script>
+{% endblock %}

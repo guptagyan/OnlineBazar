@@ -1,0 +1,102 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Online Bazar | Seller Profile Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-lg-6 col-md-6 col-sm-12 mb-4 text-center">
+      {% if User.pic %}
+      <img src="{{User.pic.url}}" class="img-fluid rounded shadow-lg" style="max-height: 350px;">
+      {% else %}
+      <img src="{% static 'images/noimage.png' %}" class="img-fluid rounded shadow-lg" style="max-height: 350px;">
+      {% endif %}
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12">
+      <h3 class="text-center p-3 mb-3 rounded bg-white text-dark shadow-sm" style="font-family: cursive;">👤 Seller Profile</h3>
+      <table class="table table-bordered table-hover table-striped text-dark" style="font-family: cursive; background-color: #f8f9fa; border-radius: 10px;">
+        <tr><th>Name</th><td>{{User.name}}</td></tr>
+        <tr><th>Username</th><td>{{User.username}}</td></tr>
+        <tr><th>Email</th><td>{{User.email}}</td></tr>
+        <tr><th>Phone</th><td>{{User.phone}}</td></tr>
+        <tr><th>House No.</th><td>{{User.addressline1}}</td></tr>
+        <tr><th>PIN</th><td>{{User.pin}}</td></tr>
+        <tr><th>City</th><td>{{User.city}}</td></tr>
+        <tr><th>State</th><td>{{User.state}}</td></tr>
+        <tr>
+          <td colspan="2">
+            <a href="/updateProfile/" class="btn btn-outline-success w-100 shadow-sm">Update Profile</a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<h4 class="text-center text-white py-3 rounded shadow" style="background: linear-gradient(to right, #2193b0, #6dd5ed); font-weight: bold;">
+  🛍️ Product Section 
+  <a href="/add-product/" class="text-white ms-2"><i class="fa fa-plus"></i></a>
+</h4>
+
+<div class="container mb-5">
+  <div class="table-responsive">
+    <table class="table table-hover table-striped bg-white rounded shadow-sm">
+      <thead class="table-primary">
+        <tr>
+          <th></th>
+          <th>Name</th>
+          <th>Color</th>
+          <th>Size</th>
+          <th>Base Price</th>
+          <th>Discount</th>
+          <th>Final Price</th>
+          <th>Stock</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in products %}
+        <tr>
+          <td>
+            {% if i.pic1 %}
+            <img src="{{i.pic1.url}}" height="100px" width="100px">
+            {% else %}
+            <img src="{% static 'picture/noimg.png' %}" height="100px" width="100px">
+            {% endif %}
+          </td>
+          <td>{{i.name}}</td>
+          <td>{{i.color}}</td>
+          <td>{{i.size}}</td>
+          <td>&#8377;{{i.baseprice}}</td>
+          <td>{{i.discount}}%</td>
+          <td>&#8377;{{i.finalprice}}</td>
+          <td>{{i.stock}}</td>
+          <td><a href="/edit-product/{{i.id}}/" class="btn text-primary"><i class="material-icons">edit</i></a></td>
+          <td><button class="btn text-danger" onclick="fun('{{i.id}}')"><i class="material-icons">delete_forever</i></button></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  body {
+    background: linear-gradient(to bottom right, #f0f4ff, #dbefff);
+    font-family: 'Poppins', sans-serif;
+  }
+</style>
+
+<script>
+  function fun(num) {
+    if (confirm("Are You Sure!!! Do You want delete this Item"))
+      window.location.href = `/delete-product/${num}/`;
+  }
+</script>
+{% endblock %}

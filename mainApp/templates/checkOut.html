@@ -1,0 +1,134 @@
+{% extends 'index.html' %}
+
+
+
+{% load static %}
+{% load cart %}
+{% block title %}
+<title>Online Bazar | Cart Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="row mt-1">
+    <div class="col-md-6 col-sm-12 col-12">
+        <h3 style="color:rgba(0, 0, 0, 0.918); font-family: cursive; text-transform: capitalize;"
+            class="p-3 mb-2 bg-white text-black text-center ">Billing Details </h3>
+        <table class="table table-white text-black table-striped table-hover">
+            <tr>
+                <th>Name</th>
+                <td>{{User.name}}</td>
+            </tr>
+            <tr>
+                <th>User Name</th>
+                <td>{{User.username}}</td>
+            </tr>
+            <tr>
+                <th>Email Id</th>
+                <td>{{User.email}}</td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td>{{User.phone}}</td>
+            </tr>
+            <tr>
+                <th>House Number</th>
+                <td>{{User.addressline1}}</td>
+            </tr>
+
+            <tr>
+                <th>PIN</th>
+                <td>{{User.pin}}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{User.city}}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{User.state}}</td>
+            </tr>
+            <tr>
+                <th colspan="2"><a style="color:white; font-family: cursive; text-transform: capitalize;"
+                        href="/updateProfile/" class="btn-success btn  w-100 ">Update Profile</a></th>
+
+            </tr>
+
+        </table>
+    </div>
+    <div class="col-md-6 col-sm-12 col-12">
+        <h4 class="bg-white text-black text-center p-2 mt-4">Cart Section </h4>
+        <div class="table-responsive">
+            <table class="table table-hover table-striped table-light">
+                <tr>
+
+                    <th></th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Size</th>
+
+                    <th>Price</th>
+
+                    <th>QTY</th>
+
+                    <th>Total</th>
+
+
+                </tr>
+                {% for i in Cart %}
+                <tr>
+                    {% if request|cartProductImage:i %}
+                    <td><img src="{{request|cartProductImage:i}}" height="100px" width="100px"></td>
+                    {% else %}
+                    <td><img src="{% static 'picture/noimg.png' %}" height="100px" width="100px"></td>
+                    {% endif %}
+                    <td>{{request|cartProductName:i}}</td>
+                    <td>{{request|cartColor:i}}</td>
+                    <td>{{request|cartSize:i}}</td>
+
+
+                    <td>&#8377;{{request|cartProductPrice:i}}</td>
+
+
+                    <td>{{request|cartQty:i}}</td>
+
+                    <td>&#8377;{{request|cartTotal:i}}</td>
+
+
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <table class="table table-light table-striped table-hover">
+            <tr>
+                <th>Total</th>
+                <td>&#8377;{{Total}}</td>
+            </tr>
+            <tr>
+                <th>Shipping</th>
+                <td>&#8377;{{Shipping}}</td>
+            </tr>
+            <tr>
+                <th>Final</th>
+                <td>&#8377;{{Final}}</td>
+            </tr>
+            <form action="" method="post">
+                {% csrf_token %}
+                <tr>
+                    <th>Mode of Payment</th>
+                    <td>
+                        <select name="mode" class="form-control">
+                            <option value="COD">COD</option>
+                            <option value="Net Banking">Net Banking/Cart UPI/Wallet</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="2"><button type="submit" class="btn btn-success text-light w-100">Place Order</button>
+                    </th>
+                </tr>
+            </form>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

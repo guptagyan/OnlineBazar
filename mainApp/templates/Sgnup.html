@@ -1,0 +1,95 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+<title>Online Bazar | Signup Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="col-lg-4 col-md-6 col-sm-8 col-10 card p-4 rounded shadow-lg">
+        <h3 class="text-center mb-3 text-primary" style="font-family: cursive;">Signup</h3>
+
+        {% for i in messages %}
+        <div class="alert alert-danger" role="alert">
+          {{ i }}
+        </div>
+        {% endfor %}
+
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label class="form-label" style="font-family: cursive;">Name</label>
+              <input type="text" class="form-control" name="name" placeholder="Enter Your Name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" style="font-family: cursive;">Username</label>
+              <input type="text" class="form-control" name="username" placeholder="Enter Username" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" style="font-family: cursive;">Phone Number</label>
+              <input type="text" class="form-control" name="phone" placeholder="Enter Phone Number" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" style="font-family: cursive;">Email</label>
+              <input type="email" class="form-control" name="email" placeholder="Enter Email" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" style="font-family: cursive;">Password</label>
+              <input type="password" class="form-control" name="password" placeholder="Enter Password" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" style="font-family: cursive;">Confirm Password</label>
+              <input type="password" class="form-control" name="cpassword" placeholder="Confirm Password" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" style="font-family: cursive;">Account Type</label>
+              <select name="actype" class="form-control">
+                <option value="seller">Seller</option>
+                <option value="buyer">Buyer</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" style="font-family: cursive;">Signup</button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/login/" class="text-decoration-none" style="font-family: cursive; color: #007bff;">Already have an account? Login</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: linear-gradient(135deg, #E0F7FA, #E3F2FD, #D1C4E9);
+        color: #333;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.8);
+        color: #333;
+        border-radius: 8px;
+    }
+
+    .form-control:focus {
+        background: #fff;
+        box-shadow: none;
+    }
+
+    .btn-primary {
+        background-color: #1565C0;
+        border-color: #1565C0;
+    }
+
+    .btn-primary:hover {
+        background-color: #0D47A1;
+    }
+
+    .card {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.7);
+    }
+</style>
+{% endblock %}

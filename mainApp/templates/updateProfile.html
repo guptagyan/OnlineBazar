@@ -1,0 +1,104 @@
+{% extends 'index.html' %}
+
+{% load static %}
+
+{% block title %}
+<title>Online Bazar | UpdateProfile Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10 shadow-lg p-4 rounded-3"
+            style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB);">
+
+            <h3 class="text-center text-dark mb-4">Update User Profile</h3>
+
+            <div class="row">
+                <div class="col-md-5 text-center mb-3">
+                    {% if User.pic %}
+                    <img src="{{User.pic.url}}" class="img-fluid rounded-3 shadow-sm" style="max-height: 300px;">
+                    {% else %}
+                    <img src="{% static 'images/noimage.png' %}" class="img-fluid rounded-3 shadow-sm"
+                        style="max-height: 300px;">
+                    {% endif %}
+                </div>
+
+                <div class="col-md-7">
+                    {% for i in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ i }}
+                    </div>
+                    {% endfor %}
+
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" name="name" value="{{User.name}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Phone Number</label>
+                            <input type="text" class="form-control" name="phone" value="{{User.phone}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" name="email" value="{{User.email}}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">House Number</label>
+                            <input type="text" class="form-control" name="addressline1" value="{{User.addressline1}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Pin Code</label>
+                            <input type="text" class="form-control" name="pin" value="{{User.pin}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">City</label>
+                            <input type="text" class="form-control" name="city" value="{{User.city}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">State</label>
+                            <input type="text" class="form-control" name="state" value="{{User.state}}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Profile Pic</label>
+                            <input type="file" class="form-control" name="pic">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient(135deg, #F5F7FA, #E3F2FD, #D6EAF8);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-label {
+        font-weight: 500;
+    }
+
+    .btn-primary {
+        background-color: #1565C0;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background-color: #0D47A1;
+    }
+</style>
+{% endblock %}

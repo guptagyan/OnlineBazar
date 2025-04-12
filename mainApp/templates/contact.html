@@ -1,0 +1,99 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+<title>Online Bazar | Contact us Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="container my-5">
+    <h1 class="text-center text-primary fw-bold">Get in Touch</h1>
+    <p class="text-center text-muted">We'd love to hear from you!</p>
+
+    <div class="row justify-content-center align-items-center mt-4">
+        <!-- Left: Contact Form -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg p-4 border-0"
+                style="background: linear-gradient(135deg, #E3F2FD, #BBDEFB); border-radius: 15px;">
+                <h4 class="text-center text-dark mb-3">Send a Message</h4>
+
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label text-dark">Your Name</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label text-dark">Your Email</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="phone" class="form-label text-dark">Your Phone</label>
+                        <input type="text" class="form-control" name="phone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label text-dark">Subject</label>
+                        <input type="text" class="form-control" name="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="massege" class="form-label text-dark">Message</label>
+                        <textarea class="form-control" name="massege" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 fw-bold">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right: Contact Details -->
+        <div class="col-lg-5 mt-4 mt-lg-0">
+            <div class="p-4 shadow-lg rounded text-center"
+                style="background: rgba(255, 255, 255, 0.8); border-radius: 15px;">
+                <h4 class="mb-3">Contact Information</h4>
+                <p><i class="fas fa-envelope"></i> Email: <strong>gyanbabu193@gmail.com</strong></p>
+                <p><i class="fas fa-phone"></i> Phone: <strong>+91 8795649840</strong></p>
+                <p><i class="fas fa-map-marker-alt"></i> Address: <strong>Sector 22, Noida, UP</strong></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Optional: Style -->
+<style>
+    body {
+        background: linear-gradient(135deg, #F5F7FA, #E3F2FD, #D6EAF8);
+        color: #333;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-control {
+        background: rgba(255, 255, 255, 0.8);
+        color: #333;
+        border-radius: 8px;
+    }
+
+    .form-control:focus {
+        background: #fff;
+        box-shadow: none;
+    }
+
+    .btn-primary {
+        background-color: #1565C0;
+        border-color: #1565C0;
+    }
+
+    .btn-primary:hover {
+        background-color: #0D47A1;
+    }
+
+    .card {
+        backdrop-filter: blur(10px);
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block title %}
+<title>Online Bazar | Forget Password Page</title>
+{% endblock %}
+    
+{% block body %}
+<div class="container d-flex justify-content-center align-items-center min-vh-100" style="background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb, #a18cd1, #fbc2eb);">
+    <div class="col-lg-4 col-md-6 col-sm-8 col-10 shadow-lg p-4 rounded" style="background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);">
+        <h3 class="text-center mb-3" style="font-family: cursive; color: #007bff;">Forget Password</h3>
+        
+        {% for message in messages %}
+            <div class="alert {% if message.tags == 'error' %}alert-danger{% else %}alert-success{% endif %}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="email" class="form-label" style="font-family: cursive;">Email ID</label>
+              <input type="text" class="form-control" name="email" placeholder="Enter User Email" required>
+            </div>
+            <div class="mb-3">
+              <label for="password1" class="form-label" style="font-family: cursive;">New Password</label>
+              <input type="password" class="form-control" name="password1" placeholder="Enter New Password" required>
+            </div>
+            <div class="mb-3">
+              <label for="password2" class="form-label" style="font-family: cursive;">Confirm Password</label>
+              <input type="password" class="form-control" name="password2" placeholder="Enter New Password Again" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100" style="font-family: cursive;">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
