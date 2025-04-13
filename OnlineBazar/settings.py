@@ -23,9 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-1b48.up.railway.app",  # ← Railway domain yahan daalo
-]
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -34,11 +32,19 @@ CSRF_TRUSTED_ORIGINS = [
 # SECRET_KEY = 'django-insecure-d)9i-5_mjbh-qm0!uwo%d-e!v-mjwgprw50v$ag$a!l1h)%o23'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'web-production-1b48.up.railway.app',
+    'productonlinehai.com',
+]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-1b48.up.railway.app',
+    'https://productonlinehai.com',
+]
 # Application definition
 
 INSTALLED_APPS = [
