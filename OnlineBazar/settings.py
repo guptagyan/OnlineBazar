@@ -149,6 +149,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -181,8 +182,10 @@ EMAIL_HOST_PASSWORD = 'ulys fufa pbgw fgto'  # This is your app password
 DEFAULT_FROM_EMAIL = 'gyanbabu193@gmail.com'
 LOGIN_URL = '/accounts/login/'
 
-STATIC_URL = "/static/"
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    BASE_DIR / 'mainapp/static'
+    os.path.join(BASE_DIR, 'mainapp/static'),  # or your actual app name
 ]
-# STATIC_ROOT = BASE_DIR / 'staticfiles'
+
