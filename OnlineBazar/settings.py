@@ -32,7 +32,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # SECRET_KEY = 'django-insecure-d)9i-5_mjbh-qm0!uwo%d-e!v-mjwgprw50v$ag$a!l1h)%o23'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -167,8 +167,9 @@ STATICSTORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 RAZORPAY_API_KEY = 'rzp_test_32CWD3Lttf2AXQ'
 RAZORPAY_API_SECRET_KEY ='7I1em2G8fpERm5XKTmE6h81u'
