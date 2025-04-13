@@ -93,20 +93,19 @@ WSGI_APPLICATION = 'OnlineBazar.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': 'ycUgBqfNOEQAmARjefIsbbWTHkHAScEi',
-        'HOST': 'turntable.proxy.rlwy.net',  # नया जेनरेट हुआ डोमेन
-        'PORT': '5432',  # नया पोर्ट
+        'NAME': 'railway',  # Database name
+        'USER': 'postgres',  # Database user
+        'PASSWORD': 'tsqvUZPSrCmbMRBnefstzlFnejFUoxqI',  # Database password
+        'HOST': 'hopper.proxy.rlwy.net',  # Use the public proxy URL provided by Railway
+        'PORT': '46287',  # Public port from Railway
         'OPTIONS': {
-            'sslmode': 'require',
-            'sslrootcert': 'prod-ca-2021.crt'  # SSL सर्टिफिकेट (अगर जरूरी हो)
+            'sslmode': 'require',  # SSL encryption for secure connection
         }
     }
 }
-# ALLOWED_HOSTS = ["porpolio-production.up.railway.app", "127.0.0.1"]
-# ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-production-1b48.up.railway.app','productonlinehai.com']
 POSTGRES_LOCALLY = False
 if 'RAILWAY_STATIC_URL' in os.environ:
     ALLOWED_HOSTS.append(os.environ['RAILWAY_STATIC_URL'].replace('https://', ''))
